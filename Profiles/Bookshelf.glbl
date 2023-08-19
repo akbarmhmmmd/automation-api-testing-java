@@ -94,4 +94,9 @@
       <initValue>false</initValue>
       <name>updateReading</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>' '</initValue>
+      <name>updateBookId</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>
