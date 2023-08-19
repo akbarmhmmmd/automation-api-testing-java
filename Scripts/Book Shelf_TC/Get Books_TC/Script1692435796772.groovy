@@ -29,5 +29,5 @@ WS.verifyElementPropertyValue(ResponseGetBooks, 'data.books[0].id', bookId_1)
 
 WS.verifyElementPropertyValue(ResponseGetBooks, 'data.books[0].name', 'Buku A')
 
-WS.verifyElementPropertyValue(ResponseGetBooks, 'data.books[0].publisher', 'Dicoding Indonesia')
+WS.verifyElementPropertyValue(ResponseGetBooks, 'data.books[0].publisher', 'Muhammad Akbar')
 
