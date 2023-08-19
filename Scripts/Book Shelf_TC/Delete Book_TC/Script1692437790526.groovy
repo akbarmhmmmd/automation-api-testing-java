@@ -21,14 +21,12 @@ ResponseAddBook = WS.sendRequest(findTestObject('BookShelf/Add Book with Complet
 
 bookId = WS.getElementPropertyValue(ResponseAddBook, 'data.bookId')
 
-ResponseUpdateBook = WS.sendRequest(findTestObject('BookShelf/Update Book with Complete Data', [('port') : GlobalVariable.port
-            , ('bookId') : bookId, ('updateName') : GlobalVariable.updateName, ('updateYear') : GlobalVariable.updateYear
-            , ('updateAuthor') : GlobalVariable.updateAuthor, ('updateSummary') : GlobalVariable.updateSummary, ('updatePublisher') : GlobalVariable.updatePublisher
-            , ('updatePageCount') : GlobalVariable.updatePageCount, ('updateReadPage') : GlobalVariable.updateReadPage, ('updateReading') : GlobalVariable.updateReading]))
+ResponseDeleteBook = WS.sendRequest(findTestObject('BookShelf/Delete Book with Valid Id', [('port') : GlobalVariable.port
+            , ('bookId') : bookId]))
 
-WS.verifyResponseStatusCode(ResponseUpdateBook, 200)
+WS.verifyResponseStatusCode(ResponseDeleteBook, 200)
 
-WS.verifyElementPropertyValue(ResponseUpdateBook, 'status', 'success')
+WS.verifyElementPropertyValue(ResponseDeleteBook, 'status', 'success')
 
-WS.verifyElementPropertyValue(ResponseUpdateBook, 'message', 'Buku berhasil diperbarui')
+WS.verifyElementPropertyValue(ResponseDeleteBook, 'message', 'Buku berhasil dihapus')
 
