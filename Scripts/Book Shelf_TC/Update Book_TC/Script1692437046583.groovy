@@ -32,3 +32,36 @@ WS.verifyElementPropertyValue(ResponseUpdateBook, 'status', 'success')
 
 WS.verifyElementPropertyValue(ResponseUpdateBook, 'message', 'Buku berhasil diperbarui')
 
+ResponseUpdateWithoutName = WS.sendRequest(findTestObject('BookShelf/Update Book without Name', [('port') : GlobalVariable.port
+            , ('bookId') : bookId, ('updateName') : GlobalVariable.updateName, ('updateYear') : GlobalVariable.updateYear
+            , ('updateAuthor') : GlobalVariable.updateAuthor, ('updateSummary') : GlobalVariable.updateSummary, ('updatePublisher') : GlobalVariable.updatePublisher
+            , ('updatePageCount') : GlobalVariable.updatePageCount, ('updateReadPage') : GlobalVariable.updateReadPage, ('updateReading') : GlobalVariable.updateReading]))
+
+WS.verifyResponseStatusCode(ResponseUpdateWithoutName, 400)
+
+WS.verifyElementPropertyValue(ResponseUpdateWithoutName, 'status', 'fail')
+
+WS.verifyElementPropertyValue(ResponseUpdateWithoutName, 'message', 'Gagal memperbarui buku. Mohon isi nama buku')
+
+ResponseUpdateReadmorethanPage = WS.sendRequest(findTestObject('BookShelf/Update Book with Read Page more than Page Count', 
+        [('port') : GlobalVariable.port, ('bookId') : bookId, ('updateName') : GlobalVariable.updateName, ('updateYear') : GlobalVariable.updateYear
+            , ('updateAuthor') : GlobalVariable.updateAuthor, ('updateSummary') : GlobalVariable.updateSummary, ('updatePublisher') : GlobalVariable.updatePublisher
+            , ('updatePageCount') : GlobalVariable.updatePageCount, ('updateReadPage') : GlobalVariable.updateReadPage, ('updateReading') : GlobalVariable.updateReading]))
+
+WS.verifyResponseStatusCode(ResponseUpdateReadmorethanPage, 400)
+
+WS.verifyElementPropertyValue(ResponseUpdateReadmorethanPage, 'status', 'fail')
+
+WS.verifyElementPropertyValue(ResponseUpdateReadmorethanPage, 'message', 'Gagal memperbarui buku. readPage tidak boleh lebih besar dari pageCount')
+
+ResponseUpdateInvalidId = WS.sendRequest(findTestObject('BookShelf/Update Book with Invalid Id', [('port') : GlobalVariable.port
+            , ('bookId') : bookId, ('updateName') : GlobalVariable.updateName, ('updateYear') : GlobalVariable.updateYear
+            , ('updateAuthor') : GlobalVariable.updateAuthor, ('updateSummary') : GlobalVariable.updateSummary, ('updatePublisher') : GlobalVariable.updatePublisher
+            , ('updatePageCount') : GlobalVariable.updatePageCount, ('updateReadPage') : GlobalVariable.updateReadPage, ('updateReading') : GlobalVariable.updateReading]))
+
+WS.verifyResponseStatusCode(ResponseUpdateInvalidId, 404)
+
+WS.verifyElementPropertyValue(ResponseUpdateInvalidId, 'status', 'fail')
+
+WS.verifyElementPropertyValue(ResponseUpdateInvalidId, 'message', 'Gagal memperbarui buku. Id tidak ditemukan')
+

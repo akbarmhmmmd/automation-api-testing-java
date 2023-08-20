@@ -29,3 +29,19 @@ bookId = WS.getElementPropertyValue(ResponseAddBook, 'data.bookId')
 
 WS.verifyElementPropertyValue(ResponseAddBook, 'data.bookId', bookId)
 
+ResponseAddWithoutName = WS.sendRequest(findTestObject('BookShelf/Add Book without Name'))
+
+WS.verifyResponseStatusCode(ResponseAddWithoutName, 400)
+
+WS.verifyElementPropertyValue(ResponseAddWithoutName, 'status', 'fail')
+
+WS.verifyElementPropertyValue(ResponseAddWithoutName, 'message', 'Gagal menambahkan buku. Mohon isi nama buku')
+
+ResponseAddReadmorethanPage = WS.sendRequest(findTestObject('BookShelf/Add Book with Read Page more than Page Count'))
+
+WS.verifyResponseStatusCode(ResponseAddReadmorethanPage, 400)
+
+WS.verifyElementPropertyValue(ResponseAddReadmorethanPage, 'status', 'fail')
+
+WS.verifyElementPropertyValue(ResponseAddReadmorethanPage, 'message', 'Gagal menambahkan buku. readPage tidak boleh lebih besar dari pageCount')
+

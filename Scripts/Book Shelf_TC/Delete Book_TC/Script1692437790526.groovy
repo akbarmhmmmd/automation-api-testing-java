@@ -30,3 +30,11 @@ WS.verifyElementPropertyValue(ResponseDeleteBook, 'status', 'success')
 
 WS.verifyElementPropertyValue(ResponseDeleteBook, 'message', 'Buku berhasil dihapus')
 
+ResponseDeleteInvalidId = WS.sendRequest(findTestObject('BookShelf/Delete Book with Invalid Id'))
+
+WS.verifyResponseStatusCode(ResponseDeleteInvalidId, 404)
+
+WS.verifyElementPropertyValue(ResponseDeleteInvalidId, 'status', 'fail')
+
+WS.verifyElementPropertyValue(ResponseDeleteInvalidId, 'message', 'Buku gagal dihapus. Id tidak ditemukan')
+
