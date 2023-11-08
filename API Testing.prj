@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Project>
    <description></description>
-   <name>API Testing</name>
+   <name>TDD API Testing</name>
    <tag></tag>
    <UUID>e5b6eaac-003f-4e2d-a97f-4508656acd94</UUID>
    <migratedVersion>5.9.0</migratedVersion>
    <pageLoadTimeout>0</pageLoadTimeout>
+   <projectFileLocation>C:\Users\akbar\Katalon Studio\API Testing\API Testing.prj</projectFileLocation>
    <sourceContent>
       <sourceFolderList>
          <sourceFolderConfiguration>

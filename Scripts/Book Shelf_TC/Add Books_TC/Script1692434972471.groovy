@@ -21,6 +21,10 @@ ResponseAddBook = WS.sendRequest(findTestObject('BookShelf/Add Book with Complet
 
 WS.verifyResponseStatusCode(ResponseAddBook, 201)
 
+AddBookRespCode = WS.getResponseStatusCode(ResponseAddBook)
+
+WS.verifyEqual(AddBookRespCode, 201)
+
 WS.verifyElementPropertyValue(ResponseAddBook, 'status', 'success')
 
 WS.verifyElementPropertyValue(ResponseAddBook, 'message', 'Buku berhasil ditambahkan')
@@ -29,19 +33,33 @@ bookId = WS.getElementPropertyValue(ResponseAddBook, 'data.bookId')
 
 WS.verifyElementPropertyValue(ResponseAddBook, 'data.bookId', bookId)
 
-ResponseAddWithoutName = WS.sendRequest(findTestObject('BookShelf/Add Book without Name'))
+ResponseAddBookWithoutName = WS.sendRequest(findTestObject('BookShelf/Add Book without Name', [('port') : GlobalVariable.port
+            , ('newName') : GlobalVariable.newName, ('newYear') : GlobalVariable.newYear, ('newAuthor') : GlobalVariable.newAuthor
+            , ('newSummary') : GlobalVariable.newSummary, ('newPublisher') : GlobalVariable.newPublisher, ('newPageCount') : GlobalVariable.newPageCount
+            , ('newReadPage') : GlobalVariable.newReadPage, ('newReading') : GlobalVariable.newReading]))
 
-WS.verifyResponseStatusCode(ResponseAddWithoutName, 400)
+WS.verifyResponseStatusCode(ResponseAddBookWithoutName, 400)
 
-WS.verifyElementPropertyValue(ResponseAddWithoutName, 'status', 'fail')
+AddBookWithoutNameRespCode = WS.getResponseStatusCode(ResponseAddBookWithoutName)
 
-WS.verifyElementPropertyValue(ResponseAddWithoutName, 'message', 'Gagal menambahkan buku. Mohon isi nama buku')
+WS.verifyEqual(AddBookWithoutNameRespCode, 400)
 
-ResponseAddReadmorethanPage = WS.sendRequest(findTestObject('BookShelf/Add Book with Read Page more than Page Count'))
+WS.verifyElementPropertyValue(ResponseAddBookWithoutName, 'status', 'fail')
 
-WS.verifyResponseStatusCode(ResponseAddReadmorethanPage, 400)
+WS.verifyElementPropertyValue(ResponseAddBookWithoutName, 'message', 'Gagal menambahkan buku. Mohon isi nama buku')
 
-WS.verifyElementPropertyValue(ResponseAddReadmorethanPage, 'status', 'fail')
+ResponseAddBookMoreThanReadPage = WS.sendRequest(findTestObject('Object Repository/BookShelf/Add Book with Read Page more than Page Count', [('port') : GlobalVariable.port
+	, ('newName') : GlobalVariable.newName, ('newYear') : GlobalVariable.newYear, ('newAuthor') : GlobalVariable.newAuthor
+	, ('newSummary') : GlobalVariable.newSummary, ('newPublisher') : GlobalVariable.newPublisher, ('newPageCount') : GlobalVariable.newPageCount
+	, ('newReadPage') : GlobalVariable.newReadPage, ('newReading') : GlobalVariable.newReading]))
 
-WS.verifyElementPropertyValue(ResponseAddReadmorethanPage, 'message', 'Gagal menambahkan buku. readPage tidak boleh lebih besar dari pageCount')
+WS.verifyResponseStatusCode(ResponseAddBookMoreThanReadPage, 400)
+
+AddBookMoreThanReadRespCode = WS.getResponseStatusCode(ResponseAddBookMoreThanReadPage)
+
+WS.verifyEqual(AddBookMoreThanReadRespCode, 400)
+
+WS.verifyElementPropertyValue(ResponseAddBookMoreThanReadPage, 'status', 'fail')
+
+WS.verifyElementPropertyValue(ResponseAddBookMoreThanReadPage, 'message', 'Gagal menambahkan buku. readPage tidak boleh lebih besar dari pageCount')
 
