@@ -46,3 +46,11 @@ ResponseGetSingleProduct = WS.sendRequest(findTestObject('DummyJSON/Get Single P
 WS.verifyResponseStatusCode(ResponseGetSingleProduct, 200)
 
 WS.verifyElementPropertyValue(ResponseGetSingleProduct, 'id', GlobalVariable.numProduct)
+
+if(GlobalVariable.numProduct == 1) {
+	WS.verifyElementPropertyValue(ResponseGetSingleProduct, 'title', GlobalVariable.titleProduct1)
+} else if(GlobalVariable.numProduct == 2) {
+	WS.verifyElementPropertyValue(ResponseGetSingleProduct, 'title', GlobalVariable.titleProduct2)
+} else {
+	WS.verifyElementPropertyValue(ResponseGetSingleProduct, 'title', GlobalVariable.titleProduct3)
+}
