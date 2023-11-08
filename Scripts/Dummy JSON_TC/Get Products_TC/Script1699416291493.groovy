@@ -28,11 +28,21 @@ WS.verifyElementPropertyValue(ResponseGetProduct, 'limit', '30')
 limitProducts = WS.getElementPropertyValue(ResponseGetProduct, 'limit')
 
 for (i = 0; i < limitProducts; i++) {
-	productId = WS.getElementPropertyValue(ResponseGetProduct, "products[${i}].id")
-	productName = WS.getElementPropertyValue(ResponseGetProduct, "products[${i}].name")
-	productPrice = WS.getElementPropertyValue(ResponseGetProduct, "products[${i}].price")
-	
-	WS.verifyElementPropertyValue(ResponseGetProduct, "products[${i}].id", productId)
-	WS.verifyElementPropertyValue(ResponseGetProduct, "products[${i}].name", productName)
-	WS.verifyElementPropertyValue(ResponseGetProduct, "products[${i}].price", productPrice)
+    productId = WS.getElementPropertyValue(ResponseGetProduct, "products[$i].id")
+
+    productName = WS.getElementPropertyValue(ResponseGetProduct, "products[$i].name")
+
+    productPrice = WS.getElementPropertyValue(ResponseGetProduct, "products[$i].price")
+
+    WS.verifyElementPropertyValue(ResponseGetProduct, "products[$i].id", productId)
+
+    WS.verifyElementPropertyValue(ResponseGetProduct, "products[$i].name", productName)
+
+    WS.verifyElementPropertyValue(ResponseGetProduct, "products[$i].price", productPrice)
 }
+
+ResponseGetSingleProduct = WS.sendRequest(findTestObject('DummyJSON/Get Single Product', [('numProduct') : GlobalVariable.numProduct]))
+
+WS.verifyResponseStatusCode(ResponseGetSingleProduct, 200)
+
+WS.verifyElementPropertyValue(ResponseGetSingleProduct, 'id', GlobalVariable.numProduct)
