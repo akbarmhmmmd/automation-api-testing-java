@@ -34,4 +34,14 @@
       <initValue>'phone'</initValue>
       <name>searchPhone</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'laptops'</initValue>
+      <name>catLaptop</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'smartphones'</initValue>
+      <name>catSmartphone</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>

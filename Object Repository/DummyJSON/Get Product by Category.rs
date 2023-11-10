@@ -16,7 +16,7 @@
    <maxResponseSize>-1</maxResponseSize>
    <migratedVersion>5.4.1</migratedVersion>
    <restRequestMethod>GET</restRequestMethod>
-   <restUrl>https://dummyjson.com/products/category/smartphones</restUrl>
+   <restUrl>https://dummyjson.com/products/category/${cat}</restUrl>
    <serviceType>RESTful</serviceType>
    <soapBody></soapBody>
    <soapHeader></soapHeader>
@@ -25,6 +25,13 @@
    <soapServiceFunction></soapServiceFunction>
    <socketTimeout>-1</socketTimeout>
    <useServiceInfoFromWsdl>true</useServiceInfoFromWsdl>
+   <variables>
+      <defaultValue>GlobalVariable.catLaptop</defaultValue>
+      <description></description>
+      <id>b7d3e8bf-e280-4361-b713-f98898163216</id>
+      <masked>false</masked>
+      <name>cat</name>
+   </variables>
    <verificationScript>import static org.assertj.core.api.Assertions.*
 
 import com.kms.katalon.core.testobject.RequestObject

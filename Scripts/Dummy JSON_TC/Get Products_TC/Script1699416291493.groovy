@@ -62,12 +62,33 @@ ResponseGetProductBySearch = WS.sendRequest(findTestObject('Object Repository/Du
 
 WS.verifyResponseStatusCode(ResponseGetProductBySearch, 200)
 
-if(ResponseGetProductBySearch != null) {
-	totalSearch = WS.getElementPropertyValue(ResponseGetProductBySearch, 'total')
+totalSearch = WS.getElementPropertyValue(ResponseGetProductBySearch, 'total')
+
+if(totalSearch != 0) {
 	for(i = 0; i < totalSearch; i++ ) {
 		searchId = WS.getElementPropertyValue(ResponseGetProductBySearch, "products[$i].id")
 		searchTitle = WS.getElementPropertyValue(ResponseGetProductBySearch, "products[$i].title")
 		WS.verifyElementPropertyValue(ResponseGetProductBySearch, "products[$i].id", searchId)
 		WS.verifyElementPropertyValue(ResponseGetProductBySearch, "products[$i].title", searchTitle)
 	}
+} else {
+	WS.verifyElementPropertyValue(ResponseGetProductBySearch, 'total', 0)
+}
+
+ResponseGetProductByCategory = WS.sendRequest(findTestObject('Object Repository/DummyJSON/Get Product by Category', [('cat') : GlobalVariable.catLaptop]))
+
+WS.verifyResponseStatusCode(ResponseGetProductByCategory, 200)
+
+totalCategory = WS.getElementPropertyValue(ResponseGetProductByCategory, 'total')
+
+if(totalCategory != 0) {
+	for(i = 0; i < totalCategory; i++ ) {
+		catId = WS.getElementPropertyValue(ResponseGetProductByCategory, "products[$i].id")
+		catTitle = WS.getElementPropertyValue(ResponseGetProductByCategory, "products[$i].title")
+		WS.verifyElementPropertyValue(ResponseGetProductByCategory, "products[$i].id", catId)
+		WS.verifyElementPropertyValue(ResponseGetProductByCategory, "products[$i].title", catTitle)
+	}
+} else {
+	WS.verifyElementPropertyValue(ResponseGetProductByCategory, 'total', 0)
+	WS.verifyElementPropertyValue(ResponseGetProductByCategory, 'limit', 0)
 }
