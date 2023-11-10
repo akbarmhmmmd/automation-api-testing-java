@@ -24,4 +24,14 @@
       <initValue>'Samsung Universe 9'</initValue>
       <name>titleProduct3</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'laptop'</initValue>
+      <name>searchLaptop</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'phone'</initValue>
+      <name>searchPhone</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>

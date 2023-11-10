@@ -3,6 +3,9 @@ import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
+
+import java.nio.file.WatchService
+
 import com.kms.katalon.core.checkpoint.Checkpoint as Checkpoint
 import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
 import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords as Mobile
@@ -53,4 +56,18 @@ if(GlobalVariable.numProduct == 1) {
 	WS.verifyElementPropertyValue(ResponseGetSingleProduct, 'title', GlobalVariable.titleProduct2)
 } else {
 	WS.verifyElementPropertyValue(ResponseGetSingleProduct, 'title', GlobalVariable.titleProduct3)
+}
+
+ResponseGetProductBySearch = WS.sendRequest(findTestObject('Object Repository/DummyJSON/Get Product by Search', [('type') : GlobalVariable.searchPhone]))
+
+WS.verifyResponseStatusCode(ResponseGetProductBySearch, 200)
+
+if(ResponseGetProductBySearch != null) {
+	totalSearch = WS.getElementPropertyValue(ResponseGetProductBySearch, 'total')
+	for(i = 0; i < totalSearch; i++ ) {
+		searchId = WS.getElementPropertyValue(ResponseGetProductBySearch, "products[$i].id")
+		searchTitle = WS.getElementPropertyValue(ResponseGetProductBySearch, "products[$i].title")
+		WS.verifyElementPropertyValue(ResponseGetProductBySearch, "products[$i].id", searchId)
+		WS.verifyElementPropertyValue(ResponseGetProductBySearch, "products[$i].title", searchTitle)
+	}
 }
